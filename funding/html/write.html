@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load staticfiles %}
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Crowd Funding</title>
+
+	<script src="{% static "js/ckeditor.js" %}"></script>
+	<script src="{% static "js/config.js" %}"></script>
+	<script src="{% static "js/sample.js" %}"></script>
+	<script src="{% static "js/styles.js" %}"></script>
+	<script src="{% static "js/lang/ko.js" %}"></script>
+	<script src="{% static "js/ie-emulation-modes-warning.js" %}"></script>
+	<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+	<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static "js/skins/moono/editor.css" %}">
+	<link rel="stylesheet" href="{% static "css/samples.css" %}">
+	<link rel="stylesheet" href="{% static "css/neo.css" %}">
+	<link href="{% static "css/carousel.css" %}" rel="stylesheet">
+</head>
+<body style="background-color:#EDEDED;">
+	<header>
+	<!--네비게이션바-->
+	 <div class="navbar-wrapper">
+      <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">친절한 겨자씨</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">겨자씨 보기 <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">- 공연</a></li>
+                    <li><a href="#">- 선교</a></li>
+                    <li><a href="#">- 프로젝트</a></li>
+                    <li><a href="#">- 후원</a></li>
+                  </ul>
+                </li>
+                <li><a href="#about">겨자씨 만들기</a></li>
+                <li><a href="#contact">About Us</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right" style="margin-right:20px">
+                   {% if user == None%}
+                <li class="active"><a href="/Login">Login</a></li>
+              	{% else %}
+                <li class="active"><a href="/Write">Write</a></li>
+                 <li class="active"><a href="/logout">Logout</a></li>
+              	
+                {% endif%}
+             
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+    </header>
+
+    <form action='/WriteMain/' method='POST' align="center" class="form-horizontal">
+	{% csrf_token %}
+    <div class="form-group">
+    	<div class="col-md-1"></div>
+        <label for="inputName" style="text-align:center;" class="col-md-2 control-label">프로젝트명</label>
+        <div class="col-md-8 ">
+        	<input type="text" class="form-control" id="inputName" autofocus placeholder="Project Name" name='inputName' required>
+ 		</div>
+     </div>
+
+    <div class="form-group">
+    	<div class="col-md-1"></div>
+        <label for="inputName" style="text-align:center;" class="col-md-2 control-label">분류</label>
+        <div class="col-md-8 ">
+        	<select id="chart" size="1" name="chart" class="form-control">
+					<option value="공연">공연</option>
+					<option value="선교">선교</option>
+					<option value="프로젝트">프로젝트</option>
+					<option value="후훵">후원</option>
+			</select>
+ 		</div>
+     </div>
+        
+    <div class="form-group">
+    	<div class="col-md-1"></div>
+        <label for="inputName" style="text-align:center;" class="col-md-2 control-label">마감일자</label>
+        <div class="col-md-8 ">
+        	<input type="date" class="form-control" id="duedate" placeholder="Name" name='duedate' required>
+ 		</div>
+     </div>
+
+
+    <div class="form-group">
+    	<div class="col-md-1"></div>
+        <label for="inputName" style="text-align:center;" class="col-md-2 control-label">목표금액</label>
+        <div class="col-md-8 ">
+       		<input type="text" class="form-control" onkeyup="getNumber(this)" onchange="getNumber(this)" placeholder="ex) 10,000" id="money" name='target_money' required>
+       		<script src="{% static "js/money_comma.js" %}"></script> <!-- 천단위마다 자동 comma-->
+ 		</div>
+     </div>
+
+
+    <div class="form-group">
+    	<div class="col-md-1"></div>
+        <label for="inputName" style="text-align:center;" class="col-md-2 control-label">계좌번호</label>
+        <div class="col-md-8 ">
+        	<input type="tel" class="form-control" id="inputName" placeholder="Bank Account (without ' - ')" name='bank' required>
+ 		</div>
+     </div>
+
+    <div class="form-group">
+    <div class="col-md-1"></div>
+        <label for="inputName" style="text-align:center;" class="col-md-2 control-label">내용</label>
+    <div class="col-md-8">
+	<textarea name="inputArticleContents" class="ckeditor" rows="20" cols="50"></textarea>
+	</div>
+	<br><br>	
+	
+	<div >
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+	<br><br>
+	<input type="submit" value="방만들기" style="margin-left: 200px;" class="btn btn-info">
+	<a onclick="location.href='./"><input type="button" value="취소" style="margin-left:80px;" class="btn btn-danger"></a>
+	</div>	
+	<div class="col-md-1"></div>
+	</div>
+</form>
+
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="{% static "js/holder.js" %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+</body>
+</html>
