@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# -*- coding: euc-kr -*-
 """
 Django settings for djangoproject project.
 
@@ -8,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 '''
-여기는 그냥 서버 관리 하는 곳이라서 특별한일 없으면 안건드리셔도 됩니다.'
-''
+여기는 그냥 서버 관리 하는 곳이라서 특별한일 없으면 안건드리셔도 됩니다.
+
 '''
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os

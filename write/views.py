@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# -*- coding: euc-kr -*-
+
 from django.shortcuts import render
 
 from django.contrib.auth.decorators import login_required
@@ -15,12 +18,14 @@ from login.models import *
 from django.contrib.auth.models import User  
 
 # Create your views here.
-
-def write(request):
+'''
+write를 눌렀을 때 글 쓰는 곳으로 넘어가서 글쓰기 까지 담당하는 곳
+'''
+def write(request):#글쓰는 페이지로 넘어감
     return render_to_response("html/write.html",{"user" : request.user})
 
 @csrf_exempt
-def writeMain(request):
+def writeMain(request):#글쓰고 넘어온 데이터들 처리하는 곳
     if request.method=="POST":
         inputName = request.POST['inputName']
         chart = request.POST['chart']

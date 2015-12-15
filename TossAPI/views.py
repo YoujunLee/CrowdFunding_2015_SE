@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# -*- coding: euc-kr -*-
 from django.shortcuts import render
 import json
 import pycurl
@@ -10,8 +12,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http.response import HttpResponseRedirect
 from write.models import *
 # Create your views here.
+'''
+토스 API를 전담하는 곳
+'''
 @csrf_exempt
-def DumpJson(request,offset):
+def DumpJson(request,offset): #토스 API 결제를 담당하는 곳
     dicBody={}
     
     

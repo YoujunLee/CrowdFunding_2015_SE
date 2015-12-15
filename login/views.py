@@ -18,15 +18,17 @@ from django.db.models import Q #������ ���̽� OR ��� �
 from login.models import Profile    # ȸ�� �߰� ���� model
 from django.contrib.auth.models import User    # user model ���
 from write.models import *
-
-def main(request):
+'''
+로그인과 메인페이지를 전담하는 폴더
+'''
+def main(request):#로그인 되어있을시 메인페이로 돌아가는 뷰
     try:
             write = WriteData.objects.filter()[0]
     except:
             write=None
     return render_to_response("html/index.html",{"user" : request.user,"write":write})
 @csrf_exempt
-def LoginCheck(request):
+def LoginCheck(request): #로그인 확인하는곳
 
     ##�α��� �Ҷ� üŷ�ϴ� �κ�
     if request.method == 'POST':
