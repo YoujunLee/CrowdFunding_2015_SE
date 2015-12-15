@@ -50,7 +50,7 @@ def DumpJson(request,offset):
     result=json.loads(result)
     print("data : ",  result)
     print("type : ", type(result))
-    write = WriteData.objects.all()[0]
+    write = WriteData.objects.get(id=offset)
     write.putmoney+=int(request.POST['money'])
     write.save()
     String='https://toss.im/tosspay/order/orderWait?payToken='+str(result['payToken'])+'&retUrl=http://54.64.148.172/main'

@@ -29,6 +29,8 @@ def writeMain(request):
         money=request.POST['target_money']
         text=request.POST['inputArticleContents']
         money=money.replace(",","");
+        text=text.replace("\r\n","<br/>");
+        
         money=int(money)
         try:
            write=WriteData.objects.get(Name=inputName);

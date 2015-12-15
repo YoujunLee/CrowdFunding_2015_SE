@@ -10,11 +10,15 @@
     <meta name="author" content="">
     <title>Crowd Funding</title>
 
+    
 	<script src="{% static "js/ckeditor.js" %}"></script>
+  <script src="{% static "js/jquery1.9.js" %}"></script>
+
 	<script src="{% static "js/config.js" %}"></script>
 	<script src="{% static "js/sample.js" %}"></script>
 	<script src="{% static "js/styles.js" %}"></script>
 	<script src="{% static "js/lang/ko.js" %}"></script>
+
 	<script src="{% static "js/ie-emulation-modes-warning.js" %}"></script>
 	<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
 	<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
@@ -22,6 +26,8 @@
 	<link rel="stylesheet" href="{% static "css/samples.css" %}">
 	<link rel="stylesheet" href="{% static "css/neo.css" %}">
 	<link href="{% static "css/carousel.css" %}" rel="stylesheet">
+
+
 </head>
 <body style="background-color:#EDEDED;">
 	<header>
@@ -107,11 +113,27 @@
     </tr>
     <tr>
       <th class="col-md-2"> text</th>
-      <td class="col-md-8"> {{write.text}} </td>
+      <td class="col-md-8" id="data"> 
+    <script>
+
+      $(document).ready(function(){
+
+
+      var text="{{write.text}}";
+      text=text.replace(/&lt;/g,"<");
+      text=text.replace(/&gt;/g,">");
+
+      text=text.replace(/&quot;/g,"\"");
+      
+      $("#data").html(text);
+      });
+    
+    </script>
+      </td>
     
     </tr>
     </table>
-    <a href='/WriteInfo'><input type="button" value="결제하기" style="margin-left: 200px;" class="btn btn-info"></a>
+    <a href='/WriteInfo/{{write.id}}'><input type="button" value="결제하기" style="margin-left: 200px;" class="btn btn-info"></a>
   <a onclick="location.href='./"><input type="button" value="취소" style="margin-left:80px;" class="btn btn-danger"></a>
 
    <!-- Bootstrap core JavaScript

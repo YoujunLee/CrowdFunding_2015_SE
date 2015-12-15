@@ -24,10 +24,10 @@ urlpatterns = [
     url(r'^RegisterGo/$', 'login.views.Register'),
     url(r'^Login/$','login.views.login'),
     url(r'^main/$','login.views.main'),
-    url(r'^TossAPI/$','TossAPI.views.DumpJson'),
+    url(r'^TossAPI/(\d+)/$','TossAPI.views.DumpJson'),
     url(r'^LoginCheck/$','login.views.LoginCheck'),
     url(r'^Write/$','write.views.write'),
     url(r'^WriteMain/$','write.views.writeMain'),
     url(r'^View/(\d+)/$','View.views.viewData'),
-    url(r'^WriteInfo/$','View.views.WriteInfo'),
+    url(r'^WriteInfo/(\d+)/$','View.views.WriteInfo'),
 ]

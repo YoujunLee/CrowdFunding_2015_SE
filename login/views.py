@@ -21,7 +21,7 @@ from write.models import *
 
 def main(request):
     try:
-            write = WriteData.objects.get(id=1)
+            write = WriteData.objects.filter()[0]
     except:
             write=None
     return render_to_response("html/index.html",{"user" : request.user,"write":write})
